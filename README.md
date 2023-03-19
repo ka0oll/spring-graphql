@@ -9,4 +9,7 @@ GraphqlApplication main run 하면 된다.
 # graphql server 주소
 http://localhost:8080/graphql
 
-
+# 샘플
+* custom scalaType
+* n+1해결
+* jpa 관계가 유무에 따른 적용
