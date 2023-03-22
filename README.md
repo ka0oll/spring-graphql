@@ -1,7 +1,7 @@
 # 기술 스택
 ### https://www.graphql-java.com/documentation/getting-started
 ### https://docs.spring.io/spring-graphql/docs/current/reference/html/
-
+### https://docs.spring.io/spring-graphql/docs/1.0.0-M2/reference/html/#boot-graphql-metrics
 # 실행 방법
 GraphqlApplication main run 하면 된다.
 실행시 메모리 디비에 샘플 데이터가 저장된다.
