@@ -1,10 +1,14 @@
 package com.example.graphql.config
 
 import graphql.ExecutionResult
+import graphql.analysis.FieldComplexityCalculator
+import graphql.analysis.FieldComplexityEnvironment
+import graphql.analysis.MaxQueryComplexityInstrumentation
 import graphql.analysis.MaxQueryDepthInstrumentation
 import graphql.execution.instrumentation.InstrumentationContext
 import graphql.execution.instrumentation.SimpleInstrumentationContext
 import graphql.execution.instrumentation.parameters.InstrumentationExecuteOperationParameters
+import graphql.execution.instrumentation.tracing.TracingInstrumentation
 import graphql.schema.Coercing
 import graphql.schema.GraphQLScalarType
 import org.springframework.boot.autoconfigure.graphql.GraphQlSourceBuilderCustomizer
@@ -22,7 +26,9 @@ class GraphQlConfig {
     fun sourceBuilderCustomizer(): GraphQlSourceBuilderCustomizer? {
         return GraphQlSourceBuilderCustomizer { builder: SchemaResourceBuilder ->
             builder.instrumentation(listOf(
-                CustomMaxQueryDepthInstrumentation(5)
+                CustomMaxQueryDepthInstrumentation(5),
+                MaxQueryComplexityInstrumentation(100),
+                TracingInstrumentation(),
             ))
 
             builder.configureRuntimeWiring {

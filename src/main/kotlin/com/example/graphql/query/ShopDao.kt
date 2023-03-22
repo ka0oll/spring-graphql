@@ -29,10 +29,21 @@ class ShopDao : QuerydslRepositorySupport(Shop::class.java){
             }
         }
 
-        val shops = query.fetch()
-
-        return shops
+        return query.fetch()
     }
 
+    fun selectOne(id:Long, fetchType: Set<FetchType>) : Shop{
+        val query = from(QShop.shop).select(QShop.shop).where(QShop.shop.id.eq(id)).apply {
+            if(fetchType.contains(FetchType.PRODUCTS)){
+                leftJoin(QShop.shop.products, QProduct.product).fetchJoin()
+            }
+
+            if(fetchType.contains(FetchType.OWNER)){
+                leftJoin(QShop.shop.owner, QOwner.owner).fetchJoin()
+            }
+        }
+
+        return query.fetchOne()
+    }
 
 }
